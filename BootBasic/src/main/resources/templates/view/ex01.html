@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h3>타임리프 문법</h3>
+    <h3 th:text="${'hello world'}"></h3>
+    <h3>[[${'hello world'}]]</h3>
+
+    <h3 th:text="${1 == 1}"></h3>
+    <h3>[[${1 == 1}]]</h3>
+    <h3 th:text="${'a' eq 'b'}"></h3>
+    <h3>[[${'a' eq 'b'}]]</h3>
+
+    <h3>변수선언 with</h3>
+    <div th:with="a = 10">
+        [[${a}]]
+    </div>
+
+    <h3>if구문</h3>
+    <div th:with="a = 10">
+        <span th:if="${a == 20}">20입니다</span>
+        <span th:unless="${a == 20}">20이 아닙니다</span>
+    </div>
+
+    <h3>삼항연산식</h3>
+    <div th:with="a = 10">
+        [[${a == 10 ? '같음' : '다름'}]]
+    </div>
+
+</body>
+</html>
