@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/include/layout03 :: 함수(~{::.box})}">
+
+    <div id="wrap1">
+        아이디 선택자 #
+    </div>
+
+    <div class="box">
+        클래스 선택자 .
+    </div>
+
+</th:block>
+
+<!--이 페이지에서 인식되어야 하는 코드같은 경우에는 block태그 밖에서 적어주어야 한다. -->
+<script>
+    console.log("보이나?");
+</script>

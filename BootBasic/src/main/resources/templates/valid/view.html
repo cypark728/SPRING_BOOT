@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+  <h3>유효성 감사 작업</h3>
+
+  <form action="joinForm" method="post">
+    이름: <input type="text" name="name" th:value="${vo != null ? vo.name : ''}">
+      <span th:if="${vo != null}" th:errors="${vo.name}"></span>
+      <br>
+    급여: <input type="number" name="salary" th:value="${vo != null ? vo.salary : ''}">
+      <span th:if="${vo != null}" th:errors="${vo.salary}"></span>
+      <br>
+    휴대폰: <input type="text" name="phone" th:value="${vo != null ? vo.phone : ''}">
+      <span th:if="${vo != null}" th:errors="${vo.phone}"></span>
+      <br>
+    이메일: <input type="text" name="email" th:value="${vo != null ? vo.email : ''}">
+      <span th:if="${vo != null}" th:errors="${vo.email}"></span>
+      <br>
+
+    <input type="submit" value="유효성검사확인하기">
+  </form>
+
+</body>
+</html>

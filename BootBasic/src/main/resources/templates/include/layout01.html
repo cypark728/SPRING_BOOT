@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <!-- 공통으로 사용할 UI를 구성하고 include -->
+
+    <!-- 딱 이부분만 다른 파일에서 사용할 수 있게 하려면 fragment -->
+    <div th:fragment="part1">
+        <h3>공통으로 사용할 UI 파트 1</h3>
+    </div>
+
+    <div th:fragment="part2">
+        <h3>공통으로 사용할 UI 파트 2</h3>
+    </div>
+
+</body>
+</html>

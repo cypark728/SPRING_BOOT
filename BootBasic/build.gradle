@@ -32,6 +32,8 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok' //롬복
 	testImplementation 'org.springframework.boot:spring-boot-starter-test' //테스트환경
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher' //junit테스트환경
+	//유효성 검사
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 	//JSP 화면으로 쓰려면
 	//implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.83'
