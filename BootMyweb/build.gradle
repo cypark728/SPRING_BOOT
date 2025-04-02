@@ -4,7 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
-group = 'com.simple'
+group = 'com.coding404'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -25,23 +25,15 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok' //롬복
+	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.mysql:mysql-connector-j' //커넥터
-	runtimeOnly 'com.oracle.database.jdbc:ojdbc11' //커넥터
-	annotationProcessor 'org.projectlombok:lombok' //롬복
-	testImplementation 'org.springframework.boot:spring-boot-starter-test' //테스트환경
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher' //junit테스트환경
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation 'org.springframework.boot:spring-boot-starter-validation' //유효성 검사
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0' //마이바티스
 	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16' //sql 로깅
-
-	//JSP 화면으로 쓰려면
-	//implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.83'
-	//implementation 'javax.servlet:jstl:1.2'
-
-	//버전 명시하고 싶으면 뒤에 붙임. 아니면 자동으로 스프링 부트 버전 따라감.
-	//implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.7.18'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' //타임리프뷰
 }
 

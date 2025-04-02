@@ -1,0 +1,15 @@
+create database spring default charset utf8;
+create user spring identified by 'spring';
+grant all privileges on spring.* to spring;
+
+# 타입, 서브쿼리, 함수 조금씩 바뀜
+# 오라클에서 MySql로 변경되는 점
+# varchar2(30) -> varchar(30)
+# number(10) -> int, decimal(10, 3)(실수)
+# date -> date, timestamp
+# 시퀀스가 없고, 대신 "auto_increment"가 있다.
+# 조인구문은 다 같음 (inner, left, right, full, outer, cross)
+# 서브쿼리절에는 반드시 테이블 엘리어스를 부착alter
+select * from
+(select 'hello') as a;
+#함수는 찾아서 쓸것!
