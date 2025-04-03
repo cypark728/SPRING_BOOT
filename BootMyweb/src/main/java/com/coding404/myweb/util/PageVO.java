@@ -1,8 +1,13 @@
 package com.coding404.myweb.util;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class PageVO {
     //페이지네이션을 계산하기 위한 클래스
     private int start; //시작페이지 번호

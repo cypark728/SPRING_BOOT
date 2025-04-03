@@ -111,8 +111,6 @@ public class ProductController {
         model.addAttribute("list", list);
         model.addAttribute("pageVO", pageVO);
 
-        log.info(cri.toString());
-
         return "product/productList";
     }
 }
