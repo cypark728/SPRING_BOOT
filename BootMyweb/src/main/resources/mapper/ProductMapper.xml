@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.coding404.myweb.product.service.ProductMapper">
+
+    <insert id="productRegist" parameterType="ProductVO">
+        insert into PRODUCT(prod_enddate,
+                            prod_writer,
+                            prod_name,
+                            prod_price,
+                            prod_count,
+                            prod_discount,
+                            prod_purchase_yn,
+                            prod_content,
+                            prod_comment
+        )
+        values (#{prodEnddate},
+                #{prodWriter},
+                #{prodName},
+                #{prodPrice},
+                #{prodCount},
+                #{prodDiscount},
+                #{prodPurchaseYn},
+                #{prodContent},
+                #{prodComment}
+               )
+    </insert>
+
+    <select id="getList" resultType="ProductVO">
+        select *
+        from PRODUCT
+        where prod_writer = #{prodWriter}
+        order by prod_id desc
+        limit #{cri.pageStart}, #{cri.amount}
+    </select>
+
+    <select id="getDetail" resultType="ProductVO">
+        select *
+        from PRODUCT
+        where prod_id = #{prodId}
+    </select>
+
+    <update id="productUpdate" parameterType="ProductVO">
+        update PRODUCT
+        set prod_enddate = #{prodEnddate}
+            ,prod_name = #{prodName}
+            ,prod_price = #{prodPrice}
+            ,prod_count = #{prodCount}
+            ,prod_discount = #{prodDiscount}
+            ,prod_purchase_yn = #{prodPurchaseYn}
+            ,prod_content = #{prodContent}
+            ,prod_comment = #{prodComment}
+        where prod_id = #{prodId}
+    </update>
+
+    <delete id="productDelete" parameterType="ProductVO">
+        delete from PRODUCT
+        where PROD_ID = #{prodId}
+    </delete>
+
+    <select id="getTotal" resultType="int">
+        select count(*) as total
+        from PRODUCT
+        where prod_writer = #{prodWriter}
+    </select>
+
+</mapper>

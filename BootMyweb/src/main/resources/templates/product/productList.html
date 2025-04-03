@@ -90,46 +90,54 @@
 													<th>등록자</th>
 												</tr>
 
-												<tr>
-													<td>1</td>
+												<tr th:each="vo, status : ${list}">
+													<td>[[${status.count}]]</td>
 													<td>
 														<a href="#" class="normal_btn">정보수정</a>
 														<a href="#" class="normal_btn modalOn">이미지수정</a>
 													</td>
-													<td>20171518</td>
+													<td>[[${vo.prodId}]]</td>
 													<td>.....</td>
 
 													<td>
-														<a title="상세보기(클릭)" href="product_detail.html">
-															비타오백
+														<a title="상세보기(클릭)" th:href="@{/product/productDetail(prodId=${vo.prodId})}">
+															[[${vo.prodName}]]
 														</a>
 													</td>
-													<td>2017-03-01</td>
-													<td>16,000</td>
-													<td>0개</td>
-													<td>15%</td>
-													<td>판매중</td>
-													<td>처리완료</td>
-													<td>이규호</td>
+													<td>[[${#temporals.format(vo.prodRegdate, 'yyyy년 MM월 dd일 HH:mm:ss')}]]</td>
+													<td>[[${vo.prodPrice}]]</td>
+													<td>[[${vo.prodCount}]]개</td>
+													<td>[[${vo.prodDiscount}]]%</td>
+													<td>[[${vo.prodPurchaseYn == 'Y' ? '1회제한' : '제한없음'}]]</td>
+													<td>[[${vo.prodEnddate}]]</td>
+													<td>[[${vo.prodWriter}]]</td>
 
 												</tr>
 											</table>
 
-
+											[[${pageVO}]]
 											<div class="page">
 												<ul>
-													<li><a href="#"><i class="fa fa-angle-double-left"
+													<li><a th:href="@{productList(page=1, amount=${pageVO.amount})}"><i class="fa fa-angle-double-left"
 																	   aria-hidden="true"></i></a></li>
-													<li style="margin-right:5px;"><a href="#"><i class="fa fa-angle-left"
+
+													<th:block th:if="${pageVO.prev}">
+													<li style="margin-right:5px;"><a th:href="@{productList(page=${pageVO.start} - 1, amount=${pageVO.amount})}"><i class="fa fa-angle-left"
 																								 aria-hidden="true"></i></a></li>
-													<li class="on"><a href="#">1</a></li>
-													<li><a href="#">2</a></li>
-													<li><a href="#">3</a></li>
-													<li><a href="#">4</a></li>
-													<li><a href="#">5</a></li>
-													<li style="margin-left:5px;"><a href="#"><i class="fa fa-angle-right"
+													</th:block>
+
+													<th:block th:each="page : ${pageVO.pageList}">
+													<li th:class="${pageVO.page == page ? 'on' : ''}">
+														<a th:href="@{productList(page=${page}, amount=${pageVO.amount})}">[[${page}]]</a>
+													</li>
+													</th:block>
+
+													<th:block th:if="${pageVO.next}">
+													<li style="margin-left:5px;"><a th:href="@{productList(page=${pageVO.end} + 1, amount=${pageVO.amount})}"><i class="fa fa-angle-right"
 																								aria-hidden="true"></i></a></li>
-													<li><a href="#"><i class="fa fa-angle-double-right"
+													</th:block>
+
+													<li><a th:href="@{productList(page=${pageVO.realEnd}, amount=${pageVO.amount})}"><i class="fa fa-angle-double-right"
 																	   aria-hidden="true"></i></a></li>
 												</ul>
 											</div>
@@ -214,5 +222,11 @@
 
 <script src="/js/modal.js"></script>
 
+<script th:inline="javascript">
+	var msg = JSON.parse(`[[${msg}]]`);
+	if(msg != null) {
+		alert(msg);
+	}
+</script>
 
 </html>
