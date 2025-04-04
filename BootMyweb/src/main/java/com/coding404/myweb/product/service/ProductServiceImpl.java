@@ -24,8 +24,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int getTotal(String prodWriter) {
-        return productMapper.getTotal(prodWriter);
+    public int getTotal(String prodWriter, Criteria cri) {
+        return productMapper.getTotal(prodWriter, cri);
     }
 
     @Override

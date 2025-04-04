@@ -9,6 +9,13 @@ public class Criteria {
     private int page; //페이지번호
     private int amount; //데이터개수
 
+    //검색 키워드 추가
+    private String searchName;
+    private String searchContent;
+    private String searchPrice;
+    private String startDate;
+    private String endDate;
+
     public Criteria() {
         this(1, 10);
     }
