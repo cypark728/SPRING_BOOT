@@ -8,5 +8,86 @@
 
     타임리프로 보여진 화면
 
+    <button type="button" id="getData">get방식</button>
+    <button type="button" id="getPost">post방식</button>
+    <button type="button" id="getData2">get방식2</button>
+    <button type="button" id="getPost2">post방식2</button>
+
+
+    <script>
+        var getData = document.getElementById("getData");
+
+        getData.onclick = function() {
+            //fetch("/getData?name=아이네&sno=158")
+            fetch("/getData3/주르르/610")
+                .then(function (response) {
+                    return response.text();
+                })
+                .then(function (data) {
+                    console.log(data);
+                });
+        }
+    </script>
+
+    <script>
+        var getPost = document.getElementById("getPost");
+
+        getPost.onclick = function() {
+            fetch("/getJson", {
+                method : "post",
+                headers : {
+                    "Content-Type": "application/JSON" //JSON 타입을 보냄
+                },
+                body : JSON.stringify({
+                    name:"아이네",
+                    sno:158
+                })
+            })
+            .then(function (response) {
+                return response.text(); //응답에 마는 타입으로
+            })
+            .then(function(data) {
+                console.log(data);
+            });
+        }
+    </script>
+
+    <script>
+        var getData2 = document.getElementById("getData2");
+
+        getData2.onclick = function() {
+            fetch("/api/v1/getData?num=1008&name=징버거")
+                .then(function (response) {
+                    return response.text();
+                })
+                .then(function (data) {
+                    console.log(data);
+                });
+        }
+    </script>
+
+    <script>
+        var getPost2 = document.getElementById("getPost2");
+
+        getPost2.onclick = function() {
+            fetch("/api/v1/getInfo", {
+                method : "post",
+                headers : {
+                    "Content-type": "application/JSON"
+                },
+                body : JSON.stringify({
+                    name:"징버거",
+                    no:1008
+                })
+            })
+            .then(function (response) {
+                return response.text();
+            })
+            .then(function(data) {
+                console.log(data);
+            });
+        }
+
+    </script>
 </body>
 </html>

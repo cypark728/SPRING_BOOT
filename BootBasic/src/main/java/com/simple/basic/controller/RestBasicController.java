@@ -146,14 +146,17 @@ public class RestBasicController {
     * 서버에서 응답하는 데이터는 - SimpleVO
     * rsponceEntity로 응답
     * */
-
+    @CrossOrigin("http://127.0.0.1:5500") //특정 주소에 서버를 열때, 서버 주소를 입력
+    //@CrossOrigin({"첫번째 주소", "두번째 주소"}) //원하는 주소가 여러개면, 배열로 적을 수 있음
+    //@CrossOrigin("*") //전부다 오픈
     @GetMapping("/api/v1/getData")
     public ResponseEntity<SimpleVO> getData(@RequestParam("num") int num,
                                             @RequestParam("name") String name) {
 
+        log.info(name + ", " + num);
 
         return new ResponseEntity<>(
-                new SimpleVO(1, "이순신", LocalDateTime.now())
+                new SimpleVO(num, name, LocalDateTime.now())
                 , HttpStatus.OK
         );
     }
@@ -166,8 +169,9 @@ public class RestBasicController {
     * responseEntity로 응답
     * */
 
+    @CrossOrigin("http://127.0.0.1:5500")
     @PostMapping("/api/v1/getInfo")
-    public ResponseEntity<List<SimpleVO>> getInfo(@RequestBody Map<String, Integer> map) {
+    public ResponseEntity<List<SimpleVO>> getInfo(@RequestBody Map<String, Object> map) {
 
         List<SimpleVO> list = new ArrayList<>();
         list.add(new SimpleVO(1, "아이네", LocalDateTime.now()));
