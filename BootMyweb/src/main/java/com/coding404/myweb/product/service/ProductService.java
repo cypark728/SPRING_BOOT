@@ -1,9 +1,11 @@
 package com.coding404.myweb.product.service;
 
+import com.coding404.myweb.command.CategoryVO;
 import com.coding404.myweb.command.ProductVO;
 import com.coding404.myweb.util.Criteria;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ProductService {
 
@@ -16,5 +18,8 @@ public interface ProductService {
     void productUpdate(ProductVO vo);
     int productDelete(ProductVO vo);
 
+    //카테고리
+    List<CategoryVO> getCategory(); //1단 select
+    List<CategoryVO> getCategorySub(CategoryVO vo); //2단, 3단
 }
 

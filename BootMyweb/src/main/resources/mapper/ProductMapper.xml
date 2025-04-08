@@ -110,4 +110,20 @@
         </if>
     </select>
 
+    <!-- 카테고리 1단 select-->
+    <select id="getCategory" resultType="CategoryVO">
+        select *
+        from PRODUCT_CATEGORY
+        where category_lv = 1
+    </select>
+
+    <!-- 카테고리 2단, 3단 select-->
+    <select id="getCategorySub" resultType="CategoryVO">
+        select *
+        from PRODUCT_CATEGORY
+        where group_id = #{groupId}
+        and category_parent_lv = #{categoryLv}
+        and category_detail_parent_lv = #{categoryDetailLv}
+    </select>
+
 </mapper>
