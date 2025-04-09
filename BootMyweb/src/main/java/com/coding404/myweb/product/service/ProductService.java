@@ -21,5 +21,7 @@ public interface ProductService {
     //카테고리
     List<CategoryVO> getCategory(); //1단 select
     List<CategoryVO> getCategorySub(CategoryVO vo); //2단, 3단
+
+
 }
 

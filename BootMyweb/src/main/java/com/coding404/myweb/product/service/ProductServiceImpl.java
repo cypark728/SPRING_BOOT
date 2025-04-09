@@ -46,9 +46,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<CategoryVO> getCategory() {
-        return productMapper.getCategory();
-    }
+    public List<CategoryVO> getCategory() {return productMapper.getCategory();}
 
     @Override
     public List<CategoryVO> getCategorySub(CategoryVO vo) {
