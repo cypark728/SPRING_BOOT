@@ -19,11 +19,11 @@ public class AjaxController {
     @Qualifier("productService")
     private ProductService productService;
 
-    //요청파라미터x, List<카테고리> 반환
+    //요청파라미터 x, List<카테고리> 반환
     @GetMapping("/getCategory")
     public ResponseEntity<List<CategoryVO>> getCategory() {
         return new ResponseEntity<>(productService.getCategory(),
-                                    HttpStatus.OK);
+                HttpStatus.OK );
     }
 
     @GetMapping("/getCategorySub/{groupId}/{categoryLv}/{categoryDetailLv}")
@@ -35,9 +35,9 @@ public class AjaxController {
                 .categoryLv(categoryLv)
                 .categoryDetailLv(categoryDetailLv)
                 .build();
-
         return new ResponseEntity<>(productService.getCategorySub(vo),
-                                    HttpStatus.OK);
+                HttpStatus.OK);
     }
+
 
 }

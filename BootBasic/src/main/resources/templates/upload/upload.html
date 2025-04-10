@@ -4,14 +4,77 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
+
 <body>
 
-  <h3>다양한 업로드 예제</h3>
-  <!-- 컨텐츠 타입: 멀티파트타입 이어야 한다-->
-  <form action="upload_ok" method="post" enctype="multipart/form-data">
-    파일선택: <input type="file" name="file">
-    <input type="submit" value="파일업로드">
-  </form>
+    <p>단일 파일 업로드</p>
+    <!-- 컨텐츠 타입: 멀티파트타입 이어야 한다-->
+    <form action="upload_ok" method="post" enctype="multipart/form-data">
+        파일선택: <input type="file" name="file">
+        <input type="submit" value="파일업로드">
+    </form>
+
+    <hr>
+
+    <p>멀티플 속성을 이용해서 여러파일 업로드</p>
+    <form action="upload_ok2" method="post" enctype="multipart/form-data">
+        파일선택: <input type="file" name="file" multiple>
+        <input type="submit" value="파일업로드">
+    </form>
+
+    <hr>
+
+    <p>동일한 이름의 복수태그를 이용해서 여러 파일 업로드</p>
+    <form action="upload_ok3" method="post" enctype="multipart/form-data">
+        파일선택: <input type="file" name="file"><br>
+        파일선택: <input type="file" name="file"><br>
+        파일선택: <input type="file" name="file"><br>
+        파일선택: <input type="file" name="file"><br>
+        <input type="submit" value="복수선택 업로드">
+    </form>
+
+    <hr>
+
+    <!--제이쿼리 링크-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    작성자: <input type="text" name="writer">
+    파일선택: <input type="file" name="file_a">
+    <button type="button" id="btn">비동기업로드</button>
+
+    <script>
+        //사용자가 버튼을 클릭하면, file_a의 데이터를 얻고, writer를 얻음
+        //폼객체를 생성하고, ajax요청
+
+        $("#btn").click(function() {
+            var writer = $("input[name=writer]").val();
+            var fileTag = $("input[name=file_a]")[0];
+            //기본적인 유효성검사....
+            //console.log(fileTag.files[0]); //파일데이터는 파일태그의 files에 담김
+
+            //js폼객체 생성
+            var formData = new FormData();
+            formData.append("writer", writer); //name=값
+            formData.append("file", fileTag.files[0]); //파일데이터
+
+            $.ajax({
+                url : "upload_ok4",
+                data: formData,
+                processData: false, //폼타입이 &name=value 형태로 자동변경되는데, 변경되는것을 방지
+                contentType: false, //멀티파트폼타입으로 지정, ajax방식에서는 contentType=false, 적지 않으면 기본 폼타입
+                type: "post",
+                success: function(result) {
+                    //콜백이 돌아오면 적절한 화면처리......
+                },
+                error: function(err, status) {
+                    console.log(err,status);
+                }
+            })
+
+
+        })
+    </script>
 
 </body>
 </html>
