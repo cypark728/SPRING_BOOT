@@ -1,12 +1,14 @@
 package com.simple.basic.config;
 
 import com.simple.basic.controller.HomeController;
+import com.simple.basic.util.interceptor.UserAuthHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration //이 클래스를 스프링의 자바설정파일로 쓴다.
@@ -38,5 +40,21 @@ public class WebConfig implements WebMvcConfigurer {
 
     }
 
+    //인터셉터 등록
+    @Bean
+    public UserAuthHandler userAuthHandler() {
+        return new UserAuthHandler();
+    }
 
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+
+        registry.addInterceptor(userAuthHandler())
+                .addPathPatterns("/user/*") //user로 시작하는 경로에서 인터셉터가 동작
+                .excludePathPatterns("/user/login") //login페이지는 제외함
+                .excludePathPatterns("/user/loginForm");
+        //만약 인터셉터가 여러개면 또 추가하면 됨
+        //registry.addInterceptor(인터셉터객체)
+        //        .addPathPatterns("적용할 경로");
+    }
 }

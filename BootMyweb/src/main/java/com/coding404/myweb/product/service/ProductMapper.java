@@ -30,4 +30,7 @@ public interface ProductMapper {
     //업로드 인서트
     int productRegistFile(ProductUploadVO vo);
 
+    //파일정보 조회
+    List<ProductUploadVO> getDetailImage(String prodId);
+
 }

@@ -1,5 +1,6 @@
 package com.coding404.myweb.controller;
 
+import com.coding404.myweb.command.ProductUploadVO;
 import com.coding404.myweb.command.ProductVO;
 import com.coding404.myweb.product.service.ProductService;
 import com.coding404.myweb.util.Criteria;
@@ -67,7 +68,9 @@ public class ProductController {
                                 Model model) {
         //prodId를 받아서 조회
         ProductVO vo = productService.getDetail(prodId);
+        List<ProductUploadVO> voImg = productService.getDetailImage(prodId);
         model.addAttribute("vo", vo);
+        model.addAttribute("voImg", voImg);
 
         return "product/productDetail";
     }

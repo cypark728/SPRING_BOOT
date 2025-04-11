@@ -1,6 +1,7 @@
 package com.coding404.myweb.product.service;
 
 import com.coding404.myweb.command.CategoryVO;
+import com.coding404.myweb.command.ProductUploadVO;
 import com.coding404.myweb.command.ProductVO;
 import com.coding404.myweb.util.Criteria;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,4 +23,6 @@ public interface ProductService {
     List<CategoryVO> getCategory(); //1단 select
     List<CategoryVO> getCategorySub(CategoryVO vo); //2단, 3단 select
 
+    //파일정보 조회
+    List<ProductUploadVO> getDetailImage(String prodId);
 }

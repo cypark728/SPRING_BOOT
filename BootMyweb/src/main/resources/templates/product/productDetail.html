@@ -54,39 +54,18 @@
                                                             <div class="blockContent">
                                                                 <div class="productText">이미지 수정은 목록을 이용해주세요</div>
                                                                 <div class="productImg">
+
+                                                                    <th:block th:each="img, status : ${voImg}">
                                                                     <div class="imgItem">
-                                                                        <span class="imgKind">대표이미지</span>
+                                                                        <span class="imgKind">[[${status.count == 1 ? '대표이미지' : '배너이미지'}]]</span>
                                                                         <div class="imgWrap">
                                                                             <div class="imgArea">
-                                                                                <img src="../img/item_main.jpg">
+                                                                                <img th:src="@{/display(filepath=${img.filepath}, uuid=${img.uuid}, filename=${img.filename})}">
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="imgItem">
-                                                                        <span class="imgKind">배너이미지</span>
-                                                                        <div class="imgWrap">
-                                                                            <div class="imgArea">
-                                                                                <img src="../img/item_banner.jpg">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="imgItem">
-                                                                        <span class="imgKind">배너이미지</span>
-                                                                        <div class="imgWrap">
-                                                                            <div class="imgArea">
-                                                                                <img src="../img/item_banner.jpg">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="imgItem">
-                                                                        <span class="imgKind">배너이미지</span>
-                                                                        <div class="imgWrap">
-                                                                            <div class="imgArea">
-                                                                                <img src="../img/item_banner.jpg">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    
+                                                                    </th:block>
+
                                                                 </div>
                                                             </div>
                                                         </td>
