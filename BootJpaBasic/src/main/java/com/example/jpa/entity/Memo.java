@@ -1,12 +1,11 @@
 package com.example.jpa.entity;
 
 import lombok.*;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
 
 @Entity //JPA가 관리함
-@Table(name = "MEMO") //테이블병
+@Table(name = "MEMO") //테이블명
 @Getter
 @Setter
 @AllArgsConstructor
@@ -23,6 +22,11 @@ public class Memo {
     private long mno;
     @Column(nullable = false, length = 100)
     private String writer;
-    @Column(columnDefinition = "varchar(200) default 'Y'")
+    @Column(columnDefinition = "varchar(200) default 'y'")
     private String text;
+
+    //매니 투 원 - 멤버를 선언
+    @ManyToOne
+    @JoinColumn(name = "member_id") //멤버테이블의 id를 내 테이블의 member_id컬럼이랑 연결함
+    private Member member;
 }

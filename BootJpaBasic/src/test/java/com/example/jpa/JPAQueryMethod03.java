@@ -39,7 +39,7 @@ public class JPAQueryMethod03 {
 
     @Test
     public void testCode04() {
-        List<Memo> list = memoRepository.findByMnoBetweenOrderByMnoAsc(1L, 20L);
+        List<Memo> list = memoRepository.findByMnoBetweenOrderByMnoDesc(1L, 20L);
         System.out.println(list.toString());
     }
 
