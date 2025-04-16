@@ -29,4 +29,11 @@ public class Memo {
 //    @ManyToOne
 //    @JoinColumn(name = "member_id") //멤버테이블의 id를 내 테이블의 member_id컬럼이랑 연결함
 //    private Member member;
+
+    //양방향 맵핑
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private  Member member;
+
+
 }

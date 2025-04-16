@@ -1,10 +1,13 @@
 package com.example.jpa;
 
+import com.example.jpa.entity.Member;
+import com.example.jpa.entity.MemberMemoDTO;
 import com.example.jpa.entity.Memo;
 import com.example.jpa.repository.MemoRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,8 +27,8 @@ public class JPACustom05 {
     //매니투원 조인
     @Test
     public void testCode02() {
-        //List<Memo> list = memoRepository.mtoJoin1(2);
-        List<Memo> list = memoRepository.mtoJoin2(2);
+        List<Memo> list = memoRepository.mtoJoin1(2);
+        //List<Memo> list = memoRepository.mtoJoin2(2);
         for(Memo m : list) {
             System.out.println(m.toString());
         }
@@ -37,7 +40,20 @@ public class JPACustom05 {
         System.out.println(list.toString());
     }
 
+    //원투매니
+    @Transactional
+    @Test
+    public void testCode04() {
+        Member m = memoRepository.otmJoin1("aaa");
+        System.out.println(m.toString());
+    }
 
+    //dto로 받기
+    @Test
+    public void testCode05() {
+        List<MemberMemoDTO> list = memoRepository.getList("aaa");
+        System.out.println(list.toString());
+    }
 
 
 

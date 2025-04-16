@@ -1,6 +1,7 @@
 package com.example.jpa.entity;
 
 import lombok.*;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+//@ToString
 public class Member {
 
     @Id
@@ -29,8 +30,17 @@ public class Member {
     private LocalDateTime signDate; //가입일
 
     //원투매니 조인
-    @OneToMany
-    @JoinColumn(name = "member_id")
+    // default조인방식은 lazy (조인을 걸고 필요한 시점에 붙일 엔티티를 셀렉트하는 방식)
+    // -> 실행 메서드에서 @Transactional을 반드시 붙임
+    //또는 조인방식 eager (즉시 조인을 걸어서 수행을 함)
+//    @OneToMany(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "member_id")
+//    List<Memo> list = new ArrayList<>();
+
+    //양방향조인 - toString한쪽에서 반드시 지움
+    //mapperdBy는 연관관계주인 - 메모테이블의 member 변수를 의미함
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     List<Memo> list = new ArrayList<>();
+
 
 }

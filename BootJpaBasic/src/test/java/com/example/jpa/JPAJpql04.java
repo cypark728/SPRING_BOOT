@@ -66,7 +66,7 @@ public class JPAJpql04 {
     @Test
     public void testCode07() {
         Memo memo = memoRepository.getNative(20L);
-        System.out.println(memo);
+
     }
 
 
