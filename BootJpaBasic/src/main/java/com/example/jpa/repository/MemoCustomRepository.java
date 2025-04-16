@@ -17,5 +17,6 @@ public interface MemoCustomRepository {
     Member otmJoin1(String id);
     //DTO로 반환받기
     List<MemberMemoDTO> getList(String id);
-
+    //실습
+    List<MemberMemoDTO> quiz(String search);
 }

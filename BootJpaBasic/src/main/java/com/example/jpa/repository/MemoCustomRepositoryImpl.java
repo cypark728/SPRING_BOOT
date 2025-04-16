@@ -87,4 +87,16 @@ public class MemoCustomRepositoryImpl implements MemoCustomRepository {
 
         return query.getResultList();
     }
+
+    @Override
+    public List<MemberMemoDTO> quiz(String search) {
+        //SELECT * FROM member m LEFT JOIN memo x ON x.member_id = m.id WHERE x.text LIKE '%sample%';
+        String sql = "select new com.example.jpa.entity.MemberMemoDTO(m.id, m.name, m.signDate, x.mno, x.writer, x.text) from Member m " +
+                "left join m.list x where x.text like :search";
+
+        TypedQuery<MemberMemoDTO> query = entityManager.createQuery(sql, MemberMemoDTO.class);
+        query.setParameter("search", "%" + search + "%");
+
+        return query.getResultList();
+    }
 }

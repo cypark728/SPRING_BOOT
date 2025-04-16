@@ -55,7 +55,11 @@ public class JPACustom05 {
         System.out.println(list.toString());
     }
 
-
+    @Test
+    public void testCode06() {
+        List<MemberMemoDTO> list = memoRepository.quiz("sample");
+        System.out.println(list.toString());
+    }
 
 
 }
