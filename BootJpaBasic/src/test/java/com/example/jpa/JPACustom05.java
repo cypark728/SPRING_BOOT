@@ -20,14 +20,26 @@ public class JPACustom05 {
         System.out.println("업데이트 성공여부:" + result);
     }
 
-    /// ///////////////////
-    //매니 투 원
+    /// ////////////////////////////
+    //매니투원 조인
     @Test
     public void testCode02() {
-        List<Memo> lsit= memoRepository.mtoJoin1(2L);
-        for(Memo m:lsit){
+        //List<Memo> list = memoRepository.mtoJoin1(2);
+        List<Memo> list = memoRepository.mtoJoin2(2);
+        for(Memo m : list) {
             System.out.println(m.toString());
         }
     }
+
+    @Test
+    public void testCode03() {
+        List<Memo> list = memoRepository.mtoJoin3("홍길동");
+        System.out.println(list.toString());
+    }
+
+
+
+
+
 
 }

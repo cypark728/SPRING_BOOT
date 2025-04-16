@@ -26,7 +26,7 @@ public class Memo {
     private String text;
 
     //매니 투 원 - 멤버를 선언
-    @ManyToOne
-    @JoinColumn(name = "member_id") //멤버테이블의 id를 내 테이블의 member_id컬럼이랑 연결함
-    private Member member;
+//    @ManyToOne
+//    @JoinColumn(name = "member_id") //멤버테이블의 id를 내 테이블의 member_id컬럼이랑 연결함
+//    private Member member;
 }

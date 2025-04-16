@@ -13,18 +13,15 @@ import java.util.List;
 
 //<엔티티, ID타입>
 public interface MemoRepository extends JpaRepository<Memo, Long>,
-        MemoCustomRepository { /*커스텀 레파지토리*/
-
+                                        MemoCustomRepository { /*커스텀 레파지토리*/
+    
     //쿼리메서드 - 메서드의유형을 보고 JPA가 select문을 실행
     //where mno between ? and ?
     List<Memo> findByMnoBetween(Long start, Long end);
-
     //where text = ? order by mno desc
     List<Memo> findByTextOrderByMnoDesc(String text);
-
     //where writer in (?, ?, ?) order by mno asc
     List<Memo> findByWriterInOrderByMnoAsc(List<String> list);
-
     //where mno between ? and ? order by mno desc
     List<Memo> findByMnoBetweenOrderByMnoDesc(Long start, Long end);
 
@@ -39,12 +36,12 @@ public interface MemoRepository extends JpaRepository<Memo, Long>,
     List<Memo> getList();
 
     @Query("select m from Memo m where m.mno >= :num order by m.text desc")
-    List<Memo> getList2(@Param("num") Long num);
+    List<Memo> getList2(@Param("num") Long num );
 
     //만약에 select구문을 선별적으로 받으면 Object[]을 사용합니다.
     @Query("select m.mno, m.writer from Memo m where m.writer like %:search%")
     List<Object[]> getList3(@Param("search") String param);
-
+    
     //JPQL - update구문 - @Modifing, @Transactional을 반드시 적어줍니다
     //update 테이블명 set 바꿀값 where 키 = ?
     @Transactional
@@ -66,12 +63,15 @@ public interface MemoRepository extends JpaRepository<Memo, Long>,
 
     //JPQL구문에 맨 마지막에 pageable을 넣으면 페이지 처리를 합니다.
     @Query("select m from Memo m where m.mno >= :a")
-    Page<Memo> getListPage(@Param("a") Long a, Pageable pageable);
+    Page<Memo> getListPage( @Param("a") Long a, Pageable pageable );
 
     //네이티브쿼리 - jpql이 아닌 sql문을 직접 날리는 방법
     @Query(value = "select * from memo where mno = ?"
-            , nativeQuery = true)
+            ,nativeQuery = true)
     Memo getNative(Long a);
 
-
+    //jpql로 조인
+    @Query("select m from Memo m inner join m.member x where m.mno >= :mno")
+    List<Memo> mtoJoin2(@Param("mno") long mno);
+    
 }

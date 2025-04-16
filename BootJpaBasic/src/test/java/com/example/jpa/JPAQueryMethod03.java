@@ -26,31 +26,30 @@ public class JPAQueryMethod03 {
 
     @Test
     public void testCode02() {
-        List<Memo> list = memoRepository.findByTextOrderByMnoDesc("sample5");
+       List<Memo> list = memoRepository.findByTextOrderByMnoDesc("sample5");
         System.out.println(list.toString());
     }
 
     @Test
     public void testCode03() {
-        List<String> find= Arrays.asList("admin3", "admin84", "admin158");
+        List<String> find = Arrays.asList("admin3", "admin85", "admin107");
         List<Memo> list = memoRepository.findByWriterInOrderByMnoAsc(find);
         System.out.println(list.toString());
     }
 
     @Test
     public void testCode04() {
-        List<Memo> list = memoRepository.findByMnoBetweenOrderByMnoDesc(1L, 20L);
-        System.out.println(list.toString());
-    }
-
-    @Test
-    public void testCode05() {
 
         Pageable pageable = PageRequest.of(0, 10);
-        Page<Memo> page = memoRepository.findByTextLikeOrWriterLike("sample123", "admin158", pageable);
-        System.out.println("데이터: " + page.getContent());
-        System.out.println("총 데이터 수: " + page.getTotalElements());
-        System.out.println("총 페이지 수: " + page.getTotalPages());
+
+        String a = "%5%";
+        String b = "%6%";
+        Page<Memo> page = memoRepository.findByTextLikeOrWriterLike(a, b, pageable);
+
+        System.out.println("데이터:" + page.getContent() );
+        System.out.println("총 데이터수:" + page.getTotalElements());
+        System.out.println("총 페이지수:" + page.getTotalPages());
     }
+
 
 }

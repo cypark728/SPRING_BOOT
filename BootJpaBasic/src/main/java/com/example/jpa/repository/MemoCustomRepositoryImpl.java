@@ -14,7 +14,7 @@ public class MemoCustomRepositoryImpl implements MemoCustomRepository {
     @PersistenceContext //엔티티매니저를 주입받을 때 사용하는 어노테이션
     private EntityManager entityManager;
 
-    @Transactional //update, delete 구문일 경우 부착
+    @Transactional //update, delete구문일 경우 부착
     @Override
     public int updateTest(String writer, Long mno) {
 
@@ -30,19 +30,33 @@ public class MemoCustomRepositoryImpl implements MemoCustomRepository {
 
         return result;
     }
-
+    
+    //매니투원조인
     @Override
     public List<Memo> mtoJoin1(long mno) {
-        //select * from memo m1 join member m2 on m1.member_id = m2.id;
-        //String sql = "select m from Memo m inner join m.member x where m.mno >= :mno"; //inner join
-        //String sql = "select m from Memo m left join m.member x where m.mno >= :mno"; //left join
-        String sql = "select m from Memo m right join m.member x where m.mno >= :mno"; //right join
+        //inner조인 - 연결되는 데이터가 없으면 안나옴
+        //left조인 - 왼쪽은 다나옴
+        //right조인 - 오른쪽 다나옴
 
+        //select * from memo m1 join member m2 on m1.member_id = m2.id
+        //String sql = "select m from Memo m inner join m.member x where m.mno >= :mno";
+        //String sql = "select m from Memo m left join m.member x where m.mno >= :mno";
+        String sql = "select m from Memo m right join m.member x where m.mno >= :mno";
         TypedQuery<Memo> query = entityManager.createQuery(sql, Memo.class);
         query.setParameter("mno", mno);
-
         List<Memo> result = query.getResultList(); //select구문은 이렇게 실행함
 
         return result;
+    }
+
+    @Override
+    public List<Memo> mtoJoin3(String name) {
+        //값을 맵핑 시킬때는 Memo로 받을 수 있고, Object[]로 받을 수 있음
+        String sql = "select m from Memo m inner join Member x on m.writer = x.name where x.name = :name";
+
+        TypedQuery<Memo> query = entityManager.createQuery(sql, Memo.class);
+        query.setParameter("name", name);
+
+        return query.getResultList();
     }
 }
