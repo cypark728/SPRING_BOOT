@@ -19,4 +19,13 @@ public interface MemoCustomRepository {
     List<MemberMemoDTO> getList(String id);
     //실습
     List<MemberMemoDTO> quiz(String search);
+
+    /// //////////////////////////////////////////
+    //쿼리dsl
+    Memo selectDsl(); //단일행
+    List<Memo> selectDsl2(); //여러행
+    List<Memo> selectDsl3(String searchType, String searchName); //동적쿼리
+
+
+
 }

@@ -3,6 +3,9 @@ package com.example.jpa.repository;
 import com.example.jpa.entity.Member;
 import com.example.jpa.entity.MemberMemoDTO;
 import com.example.jpa.entity.Memo;
+import com.example.jpa.entity.QMemo;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -15,6 +18,13 @@ public class MemoCustomRepositoryImpl implements MemoCustomRepository {
 
     @PersistenceContext //엔티티매니저를 주입받을 때 사용하는 어노테이션
     private EntityManager entityManager;
+
+    //쿼리dsl
+    private JPAQueryFactory jpaQueryFactory;
+    //생성될때 엔티티매니저를 받아서 초기화
+    public MemoCustomRepositoryImpl(EntityManager entityManager) {
+        this.jpaQueryFactory = new JPAQueryFactory(entityManager);
+    }
 
     @Transactional //update, delete구문일 경우 부착
     @Override
@@ -98,5 +108,59 @@ public class MemoCustomRepositoryImpl implements MemoCustomRepository {
         query.setParameter("search", "%" + search + "%");
 
         return query.getResultList();
+    }
+
+    //쿼리dsl
+    @Override
+    public Memo selectDsl() {
+        QMemo memo = QMemo.memo;
+        //jpaQueryFactory으로 sql을 작성
+        //select * from memo where mno = 10 order by text desc
+        Memo result = jpaQueryFactory.select(memo)
+                .from(memo)
+                .where(memo.mno.eq(10L) )
+                .orderBy(memo.text.desc())
+                .fetchOne(); //1행 반환시킴
+        return result;
+    }
+
+    @Override
+    public List<Memo> selectDsl2() {
+
+        QMemo memo = QMemo.memo;
+
+        List<Memo> list = jpaQueryFactory.select(memo)
+                .from(memo)
+                //.where(memo.text.like("%2%")) //where text like '%2%'
+                //.where(memo.mno.gt(10).and(memo.mno.lt(20)) ) //where mno > 10 and mno < 20
+                .where(memo.mno.loe(10).or(memo.mno.goe(20))) //where mno <= 10 or mno >= 20
+                .orderBy( memo.mno.asc())
+                .fetch(); //여러행을 조회함
+
+        return list;
+    }
+
+    @Override
+    public List<Memo> selectDsl3(String searchType, String searchName) {
+
+        QMemo memo = QMemo.memo;
+        //조건을 걸기위한 불린빌더 객체
+        BooleanBuilder builder = new BooleanBuilder();
+
+        //writer검색이었다면~
+        if(searchType != null && searchType.equals("writer") ) {
+            builder.and( memo.writer.like("%" +searchName + "%" ) );
+        }
+        //text검색이었다면~
+        if(searchType != null && searchType.equals("text")) {
+            builder.and( memo.text.like("%" + searchName + "%") );
+        }
+
+        List<Memo> list = jpaQueryFactory.select(memo)
+                .from(memo)
+                .where(builder)
+                .fetch();
+
+        return list;
     }
 }
